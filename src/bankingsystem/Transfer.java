@@ -5,6 +5,7 @@ public class Transfer extends javax.swing.JFrame {
 
     public Transfer() {
         initComponents();
+        this.setLocationRelativeTo(null);//form in center
     }
 
     @SuppressWarnings("unchecked")

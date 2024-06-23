@@ -13,6 +13,7 @@ public class TransferConfirm extends javax.swing.JFrame {
      */
     public TransferConfirm() {
         initComponents();
+        this.setLocationRelativeTo(null);//form in center
     }
 
     /**

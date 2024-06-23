@@ -15,6 +15,7 @@ public class Transaction extends javax.swing.JFrame {
      */
     public Transaction() {
         initComponents();
+        this.setLocationRelativeTo(null);//form in center
     }
 
     /**

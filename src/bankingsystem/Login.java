@@ -1,20 +1,35 @@
 
 package bankingsystem;
-//import java.awt.Image;
-//import javax.swing.Icon;
-//import javax.swing.ImageIcon;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 
 public class Login extends javax.swing.JFrame {
-//    ImageIcon Books= new ImageIcon("Books_1920_X_1080_copy.jpg");
     
     public Login() {
         initComponents();
-//        this.setLocationRelativeTo(null);
-//        Icon ic = jLabel1.getIcon();
-//        ImageIcon iic= (ImageIcon)ic;
-//        Image im = iic.getImage().getScaledInstance(jLabel1.getWidth(),jLabel1.getHeight(), Image.SCALE_SMOOTH);
-//        jLabel1.setIcon(new ImageIcon(im));
+        this.setLocationRelativeTo(null);
     }
+    
+    public static Connection upDataDB(){
+       Connection con= null;
+       String vi="12345678";
+       String tam="123456";     
+       try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
+           System.out.println("Connected to database successfully");
+           return con;
+       }catch(ClassNotFoundException | SQLException e){
+           throw new RuntimeException("Cannot connect to database");
+       }
+   }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,7 +51,7 @@ public class Login extends javax.swing.JFrame {
         jTextField1.setName(""); // NOI18N
 
         User.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        User.setText("Email");
+        User.setText("Citizen Identification");
         User.setName("User"); // NOI18N
 
         Password.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -136,9 +151,34 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_SignUpActionPerformed
 
     private void SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInActionPerformed
-        dispose();
-        Menu me=new Menu();
-        me.setVisible(true);
+        PreparedStatement pst;
+        ResultSet rs;
+        String name = jTextField1.getText();
+        String pass= String.valueOf(jPasswordField1.getPassword());
+
+          
+        String query="SELECT * FROM customer WHERE customername=? AND pass=?";
+                
+        try {
+            pst = Login.upDataDB().prepareStatement(query);
+            pst.setString(1, name);
+            pst.setString(2, pass);
+            rs= pst.executeQuery();
+            
+            if(rs.next()){
+                Menu me=new Menu();
+                me.setVisible(true);
+                this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Login Failed");
+            }
+         }catch(SQLException ex){
+             java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         }
+             
+
+
     }//GEN-LAST:event_SignInActionPerformed
 
     public static void main(String args[]) {
