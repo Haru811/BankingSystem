@@ -153,15 +153,15 @@ public class Login extends javax.swing.JFrame {
     private void SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInActionPerformed
         PreparedStatement pst;
         ResultSet rs;
-        String name = jTextField1.getText();
+        String cusid = String.valueOf(jTextField1.getText());
         String pass= String.valueOf(jPasswordField1.getPassword());
 
           
-        String query="SELECT * FROM customer WHERE customername=? AND pass=?";
+        String query="SELECT * FROM customer WHERE customerid=? AND pass=?";
                 
         try {
             pst = Login.upDataDB().prepareStatement(query);
-            pst.setString(1, name);
+            pst.setString(1, cusid);
             pst.setString(2, pass);
             rs= pst.executeQuery();
             

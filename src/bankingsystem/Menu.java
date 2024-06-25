@@ -7,13 +7,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);//form in center
-        
+        load();
     }
     
      public static Connection upDataDB(){
@@ -51,7 +52,6 @@ public class Menu extends javax.swing.JFrame {
         setResizable(false);
 
         Transfer.setBackground(new java.awt.Color(0, 204, 204));
-        Transfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bank.png"))); // NOI18N
         Transfer.setText("Transfer");
         Transfer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,7 +60,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
         PayElec.setBackground(new java.awt.Color(0, 204, 204));
-        PayElec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mobile-payment.png"))); // NOI18N
         PayElec.setText("Pay Electricity Bill");
         PayElec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +68,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
         Loan.setBackground(new java.awt.Color(0, 204, 204));
-        Loan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/business.png"))); // NOI18N
         Loan.setText("Loan");
         Loan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +76,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
         Saving.setBackground(new java.awt.Color(0, 204, 204));
-        Saving.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/wallet.png"))); // NOI18N
         Saving.setText("Saving");
         Saving.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +84,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
         ChaPass.setBackground(new java.awt.Color(0, 204, 204));
-        ChaPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/wallet.png"))); // NOI18N
         ChaPass.setText("Change Password");
         ChaPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +95,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setText("Balance");
 
         Transaction.setBackground(new java.awt.Color(0, 204, 204));
-        Transaction.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/notification.png"))); // NOI18N
         Transaction.setText("Transaction");
         Transaction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +103,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
         LockCard.setBackground(new java.awt.Color(0, 204, 204));
-        LockCard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/protection.png"))); // NOI18N
         LockCard.setText("Lock Card");
         LockCard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +111,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
         PayWater.setBackground(new java.awt.Color(0, 204, 204));
-        PayWater.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mobile-payment.png"))); // NOI18N
         PayWater.setText("Pay Water Bill");
         PayWater.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,7 +186,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PayWater)
                     .addComponent(ChaPass))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         pack();
@@ -250,7 +243,22 @@ public class Menu extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
        
     }//GEN-LAST:event_jLabel2MouseClicked
-
+    
+    public void load(){
+       PreparedStatement pst;
+       ResultSet rs;
+       
+       String query="SELECT * FROM customer";
+       try{
+           pst = PayElectric.upDataDB().prepareStatement(query);       
+           rs= pst.executeQuery();       
+        if(rs.next()){
+            jLabel2.setText(rs.getString(8));//balance  
+        }      
+       }catch(Exception e){
+           
+       }
+   }
 
     
     public static void main(String args[]) {
@@ -260,6 +268,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ChaPass;

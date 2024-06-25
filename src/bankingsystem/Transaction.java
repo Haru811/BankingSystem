@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package bankingsystem;
 
-/**
- *
- * @author NC
- */
+package bankingsystem;
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 public class Transaction extends javax.swing.JFrame {
 
     /**
@@ -89,9 +86,41 @@ public class Transaction extends javax.swing.JFrame {
         me.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    //     public void load(){
+//       PreparedStatement pst;
+//       ResultSet rs;
+//       String elecid= String.valueOf(jTextField2.getText());
+//       
+//       String query="SELECT * FROM electricitybill WHERE elecid='"+elecid+"' ";
+//       try{
+//           pst = PayElectric.upDataDB().prepareStatement(query);       
+//           rs= pst.executeQuery();
+//           ResultSetMetaData rsm =(ResultSetMetaData) rs.getMetaData();
+//           int n=rsm.getColumnCount();
+//           DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+//           dt.setRowCount(0);         
+//           while(rs.next()){
+//               Vector v= new Vector();
+//               for(int i=1; i <n;i++){
+//                   v.add(rs.getString(1));
+//                   v.add(rs.getString(2));
+//                   v.add(rs.getString(3));
+//                   v.add(rs.getString(4));
+//                   v.add(rs.getString(5));
+//                   v.add(rs.getString(6));
+//                   v.add(rs.getString(7));
+//                   //v.add(rs.getString(8));//status
+//                   //v.add(rs.getString(9));//transfee
+//                   v.add(rs.getString(10));
+//               }
+//               dt.addRow(v);
+//           }
+//           }catch(Exception e){
+//           
+//       }
+//   }
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
