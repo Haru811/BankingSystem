@@ -239,14 +239,14 @@ public class SignUp extends javax.swing.JFrame {
             }
             else{
                 PreparedStatement pst;
-                String query = "INSERT INTO customer(customerid,customername,email,phone,pass) VALUES (?,?,?,?,?)";
+                String query = "INSERT INTO accountt(customerid,customername,phone,email,password) VALUES (?,?,?,?,?)";
   
                 try {
                     pst = SignUp.upDataDB().prepareStatement(query);
                     pst.setString(1, customerID);
                     pst.setString(2, name);
-                    pst.setString(3, email);
-                    pst.setString(4, phone);
+                    pst.setString(3, phone);
+                    pst.setString(4, email);
                     pst.setString(5, pass);
 
                     if(pst.executeUpdate() > 0){

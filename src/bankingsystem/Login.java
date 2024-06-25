@@ -4,7 +4,6 @@ package bankingsystem;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -155,18 +154,16 @@ public class Login extends javax.swing.JFrame {
         ResultSet rs;
         String cusid = String.valueOf(jTextField1.getText());
         String pass= String.valueOf(jPasswordField1.getPassword());
-
-          
-        String query="SELECT * FROM customer WHERE customerid=? AND pass=?";
-                
+     
+        String query="SELECT * FROM accountt WHERE customerid=? AND password=?";              
         try {
             pst = Login.upDataDB().prepareStatement(query);
             pst.setString(1, cusid);
             pst.setString(2, pass);
-            rs= pst.executeQuery();
-            
-            if(rs.next()){
-                Menu me=new Menu();
+            rs= pst.executeQuery(); 
+            if(rs.next() && rs.getInt(11)!=1){
+                Menu me=new Menu(rs.getInt(1));
+                me.GetBalance(rs.getInt(7));
                 me.setVisible(true);
                 this.dispose();
             }

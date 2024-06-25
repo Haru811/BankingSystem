@@ -1,8 +1,13 @@
 
 package bankingsystem;
 
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 public class PayWater extends javax.swing.JFrame {
@@ -11,6 +16,20 @@ public class PayWater extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);//form in center
     }
+    
+    public static Connection upDataDB(){
+       Connection con= null;
+       String vi="12345678";
+       String tam="123456";     
+       try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
+           System.out.println("Connected to database successfully");
+           return con;
+       }catch(ClassNotFoundException | SQLException e){
+           throw new RuntimeException("Cannot connect to database");
+       }
+   }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -209,22 +228,22 @@ public class PayWater extends javax.swing.JFrame {
     public void load(){
        PreparedStatement pst;
        ResultSet rs;
-       String elecid= String.valueOf(jTextField1.getText());
+       String waterid= String.valueOf(jTextField1.getText());
        
-       String query="SELECT * FROM electricitybill WHERE elecid='"+elecid+"' ";
+       String query="SELECT * FROM waterbill WHERE waterid='"+waterid+"' ";
        try{
-           pst = PayElectric.upDataDB().prepareStatement(query);       
+           pst = PayWater.upDataDB().prepareStatement(query);       
            rs= pst.executeQuery();       
 
         if(rs.next()){
             jTextField2.setText(rs.getString(1));//id
-            jTextField3.setText(rs.getString(2));//elecid
+            jTextField3.setText(rs.getString(2));//waterid
             jTextField4.setText(rs.getString(3));//periodpay
             jTextField5.setText(rs.getString(4));//accountid
             jTextField6.setText(rs.getString(5));//ownername
             jTextField7.setText(rs.getString(6));//owneraddress
             jTextField8.setText(rs.getString(7));//bill
-            jTextField9.setText(rs.getString(10));//timetrans         
+            jTextField9.setText(rs.getString(9));//timetrans         
         }      
        }catch(Exception e){
            

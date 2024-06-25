@@ -1,12 +1,34 @@
 
 package bankingsystem;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 public class ChaPass extends javax.swing.JFrame {
 
     public ChaPass() {
         initComponents();
         this.setLocationRelativeTo(null);//form in center
     }
+    
+    public static Connection upDataDB(){
+       Connection con= null;
+       String vi="12345678";
+       String tam="123456";     
+       try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
+           System.out.println("Connected to database successfully");
+           //con.close();
+           return con;
+       }catch(ClassNotFoundException | SQLException e){
+           throw new RuntimeException("Cannot connect to database");
+       }
+   }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -37,6 +59,11 @@ public class ChaPass extends javax.swing.JFrame {
         jPasswordField3.setText("jPasswordField3");
 
         jButton1.setText("Confirm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jButton2.setText("<");
@@ -100,9 +127,33 @@ public class ChaPass extends javax.swing.JFrame {
         me.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String oldpass = String.valueOf(jPasswordField1.getPassword());
+        String newpass= String.valueOf(jPasswordField2.getPassword());
+        String conpass= String.valueOf(jPasswordField3.getPassword());
+        PreparedStatement pst;
+        ResultSet rs;   
+        String query1="Select pass From customer";
+        String query2="Update customer Set pass='"+newpass+"'";
+        
+         try {
+            pst = ChaPass.upDataDB().prepareStatement(query1);
+            rs= pst.executeQuery();
+            
+            if(rs.next()){
+               
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Login Failed");
+            }
+         }catch(SQLException ex){
+             java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         }
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
