@@ -1,0 +1,210 @@
+create database BANK;
+/****** Object:  Database BANK*/
+
+USE BANK;
+
+/****** Object:  Table account*/
+CREATE TABLE accountt(
+  accountid int AUTO_INCREMENT PRIMARY KEY,
+  customerid int NOT NULL,
+  customername varchar(100) NOT NULL,
+  phone varchar(20) NOT NULL,
+  email varchar(100) NULL,
+  password varchar(50) NOT NULL,
+  balance float NULL,
+  loan float(50) NULL,
+  saving float NULL,
+  notiID int NULL,
+  lockcard bit NULL
+);
+ALTER TABLE accountt AUTO_INCREMENT=100000;
+
+CREATE TABLE transfer(
+  transferid int PRIMARY KEY AUTO_INCREMENT,
+  account1id int NOT NULL,
+  account2id int NOT NULL,
+  moneytrans float NOT NULL,
+  content varchar(50) NOT NULL,
+  timetrans datetime NOT NULL
+);
+ALTER TABLE transfer AUTO_INCREMENT=10001;
+
+INSERT INTO accountt (customerid, customername, phone, email, password, balance, loan, saving, notiID) 
+VALUES 
+(512325, 'Alice Smith', '1234567890', 'alice@example.com', 'password123', 1000.00, 0.00, 0.00, NULL),
+(644513, 'Bob Johnson', '0987654321', 'bob@example.com', 'securepass', 2000.00, 200.00, 0.00, NULL),
+(512352, 'Charlie Brown', '1122334455', 'charlie@example.com', 'charliepass', 1500.00, 0.00, 700.00, NULL),
+(789456, 'Eve Johnson', '9876543210', 'eve@example.com', 'evepass', 3000.00, 500.00, 0.00, NULL),
+(456789, 'David Lee', '5556667777', 'david@example.com', 'davidpass', 2500.00, 0.00, 0.00, NULL),
+(987654, 'Grace Taylor', '1112223333', 'grace@example.com', 'gracepass', 1800.00, 100.00, 0.00, NULL),
+(123456, 'Frank White', '9998887777', 'frank@example.com', 'frankpass', 2200.00, 300.00, 0.00, NULL),
+(654321, 'Hannah Brown', '7778889999', 'hannah@example.com', 'hannahpass', 2700.00, 0.00, 0.00, NULL),
+(987123, 'Ian Johnson', '4445556666', 'ian@example.com', 'ianpass', 3200.00, 400.00, 0.00, NULL),
+(741852, 'Julia Davis', '2223334444', 'julia@example.com', 'juliapass', 1500.00, 0.00, 0.00, NULL),
+(369258, 'Kevin Smith', '6667778888', 'kevin@example.com', 'kevinpass', 2800.00, 100.00, 0.00, NULL),
+(159753, 'Lily Johnson', '3334445555', 'lily@example.com', 'lilypass', 1900.00, 200.00, 0.00, NULL),
+(258369, 'Mark Brown', '8889990000', 'mark@example.com', 'markpass', 2000.00, 0.00, 0.00, NULL),
+(852963, 'Natalie Green', '0001112222', 'natalie@example.com', 'nataliepass', 2400.00, 0.00, 0.00, NULL),
+(456123, 'Oliver Taylor', '5554443333', 'oliver@example.com', 'oliverpass', 2600.00, 0.00, 0.00, NULL),
+(147258, 'Peter White', '1110009999', 'peter@example.com', 'peterpass', 3000.00, 500.00, 0.00, NULL),
+(369147, 'Rachel Lee', '9998887777', 'rachel@example.com', 'rachelpass', 3200.00, 600.00, 0.00, NULL),
+(258963, 'Samuel Davis', '3332221111', 'samuel@example.com', 'samuelpass', 1800.00, 0.00, 0.00, NULL),
+(987321, 'Tina Johnson', '4445556666', 'tina@example.com', 'tinapass', 2200.00, 200.00, 0.00, NULL),
+(654789, 'Victor Brown', '7778889999', 'victor@example.com', 'victorpass', 2500.00, 300.00, 0.00, NULL),
+(741369, 'Wendy Smith', '6667778888', 'wendy@example.com', 'wendypass', 2800.00, 0.00, 0.00, NULL),
+(852147, 'Xavier Taylor', '0001112222', 'xavier@example.com', 'xavierpass', 1900.00, 100.00, 0.00, NULL),
+(123789, 'Yvonne Green', '2223334444', 'yvonne@example.com', 'yvonnepass', 2000.00, 0.00, 0.00, NULL),
+(369852, 'Zoe Johnson', '3334445555', 'zoe@example.com', 'zoepass', 2400.00, 0.00, 0.00, NULL),
+(456369, 'Arthur Brown', '5556667777', 'arthur@example.com', 'arthurpass', 2600.00, 100.00, 0.00, NULL),
+(789852, 'Bella Lee', '9990001111', 'bella@example.com', 'bellapass', 3000.00, 200.00, 0.00, NULL),
+(987456, 'Chris Davis', '3334445555', 'chris@example.com', 'chrispass', 3200.00, 0.00, 0.00, NULL),
+(147369, 'Dylan Johnson', '5556667777', 'dylan@example.com', 'dylanpass', 1800.00, 300.00, 0.00, NULL),
+(258147, 'Emma Brown', '1112223333', 'emma@example.com', 'emmapass', 2200.00, 0.00, 0.00, NULL),
+(369258, 'Fiona Smith', '8889990000', 'fiona@example.com', 'fionapass', 2600.00, 100.00, 0.00, NULL),
+(456852, 'George Taylor', '2223334444', 'george@example.com', 'georgepass', 2800.00, 0.00, 0.00, NULL),
+(789147, 'Holly Green', '6667778888', 'holly@example.com', 'hollypass', 1900.00, 200.00, 0.00, NULL),
+(987369, 'Ivy Johnson', '0001112222', 'ivy@example.com', 'ivypass', 2000.00, 0.00, 0.00, NULL),
+(147852, 'Jack Brown', '3334445555', 'jack@example.com', 'jackpass', 2400.00, 0.00, 0.00, NULL),
+(258369, 'Kelly Smith', '5556667777', 'kelly@example.com', 'kellypass', 2600.00, 100.00, 0.00, NULL),
+(369147, 'Leo Taylor', '9990001111', 'leo@example.com', 'leopass', 3000.00, 0.00, 0.00, NULL),
+(456789, 'Mia Davis', '1112223333', 'mia@example.com', 'miapass', 3200.00, 200.00, 0.00, NULL),
+(789123, 'Noah Johnson', '4445556666', 'noah@example.com', 'noahpass', 1800.00, 300.00, 0.00, NULL),
+(987654, 'Oscar Brown', '7778889999', 'oscar@example.com', 'oscarpass', 2200.00, 0.00, 0.00, NULL),
+(147258, 'Penny Smith', '0001112222', 'penny@example.com', 'pennypass', 2400.00, 100.00, 0.00, NULL),
+(369123, 'Quinn Johnson', '3334445555', 'quinn@example.com', 'quinnpass', 2800.00, 0.00, 0.00, NULL),
+(456789, 'Ryan Brown', '5556667777', 'ryan@example.com', 'ryanpass', 1900.00, 200.00, 0.00, NULL),
+(789456, 'Sophie Taylor', '8889990000', 'sophie@example.com', 'sophiepass', 2000.00, 0.00, 0.00, NULL),
+(987123, 'Tyler Smith', '2223334444', 'tyler@example.com', 'tylerpass', 2600.00, 100.00, 0.00, NULL);
+
+
+INSERT INTO transfer (account1id, account2id, moneytrans, content, timetrans)
+VALUES 
+(100000, 100001, 500.00, 'Payment for services', NOW()),
+(100002, 100000, 300.00, 'Loan repayment', NOW()),
+(100001, 100002, 1000.00, 'Invoice payment', NOW()),
+(100003, 100001, 700.00, 'Gift', NOW()),
+(100004, 100003, 200.00, 'Dinner split', NOW()),
+(100005, 100002, 400.00, 'Rent payment', NOW()),
+(100006, 100004, 600.00, 'Utilities', NOW()),
+(100007, 100005, 900.00, 'Car repair', NOW()),
+(100008, 100003, 1200.00, 'Holiday fund', NOW()),
+(100009, 100001, 1500.00, 'Tuition fee', NOW()),
+(100010, 100007, 800.00, 'Subscription fee', NOW()),
+(100011, 100006, 450.00, 'Medical bill', NOW()),
+(100012, 100008, 650.00, 'Grocery shopping', NOW()),
+(100013, 100009, 250.00, 'Travel expense', NOW()),
+(100014, 100010, 550.00, 'Insurance', NOW()),
+(100015, 100011, 350.00, 'Pet care', NOW()),
+(100016, 100012, 750.00, 'Gym membership', NOW()),
+(100017, 100013, 500.00, 'Dining out', NOW()),
+(100018, 100014, 900.00, 'Event ticket', NOW()),
+(100019, 100015, 650.00, 'Book purchase', NOW());
+
+/****** Object:  Table water electricitybill*/
+CREATE TABLE electricitybill(
+	id int PRIMARY KEY AUTO_INCREMENT,
+	elecid int NOT NULL,
+	periodpay date NULL,
+	accountid int NOT NULL,
+	ownername varchar(100) NOT NULL,
+	owneraddress varchar (200) NOT NULL,
+	bill float(50) NOT NULL,
+	status bit NOT NULL,
+	transfee float NULL,
+    timetrans datetime NOT NULL
+);
+    ALTER TABLE electricitybill AUTO_INCREMENT=1;
+ALTER TABLE electricitybill
+ADD CONSTRAINT fk_accountid_electricitybill
+FOREIGN KEY (accountid) REFERENCES accountt(accountid);
+-- Inserting 15 example records
+INSERT INTO electricitybill (elecid, periodpay, accountid, ownername, owneraddress, bill, status, transfee, timetrans)
+VALUES
+(1, '2024-01-01', 100000, 'Alice Smith', '123 Main St, CityA', 75.50, 1, 5.00, NOW()),
+(2, '2024-01-02', 100001, 'Bob Johnson', '456 Elm St, CityB', 100.75, 0, 7.50, NOW()),
+(3, '2024-01-03', 100002, 'Charlie Brown', '789 Pine St, CityC', 50.25, 1, 4.00, NOW()),
+(4, '2024-01-04', 100003, 'Eve Johnson', '101 Maple St, CityD', 125.00, 0, 6.50, NOW()),
+(5, '2024-01-05', 100004, 'David Lee', '202 Oak St, CityE', 90.50, 1, 5.75, NOW()),
+(6, '2024-01-06', 100005, 'Grace Taylor', '303 Cedar St, CityF', 60.75, 0, 3.50, NOW()),
+(7, '2024-01-07', 100006, 'Frank White', '404 Birch St, CityG', 110.00, 1, 6.00, NOW()),
+(8, '2024-01-08', 100007, 'Hannah Brown', '505 Walnut St, CityH', 80.25, 0, 4.25, NOW()),
+(9, '2024-01-09', 100008, 'Ian Johnson', '606 Ash St, CityI', 95.50, 1, 5.00, NOW()),
+(10, '2024-01-10', 100009, 'Julia Davis', '707 Spruce St, CityJ', 85.75, 0, 4.75, NOW()),
+(11, '2024-01-11', 100010, 'Kevin Smith', '808 Redwood St, CityK', 70.00, 1, 3.75, NOW()),
+(12, '2024-01-12', 100011, 'Lily Johnson', '909 Cypress St, CityL', 105.25, 0, 6.25, NOW()),
+(13, '2024-01-13', 100012, 'Mark Brown', '1010 Fir St, CityM', 65.50, 1, 4.00, NOW()),
+(14, '2024-01-14', 100013, 'Natalie Green', '1111 Willow St, CityN', 120.75, 0, 7.00, NOW()),
+(15, '2024-01-15', 100014, 'Oliver Taylor', '1212 Poplar St, CityO', 55.00, 1, 3.25, NOW());
+
+
+/****** Object:  Table water bill*/
+CREATE TABLE waterbill(
+	id int PRIMARY KEY AUTO_INCREMENT,
+	waterid int NOT NULL,
+	periodpay date NULL,
+   	accountid int NOT NULL,
+	ownername varchar (100) NOT NULL,
+	owneraddress varchar (200) NOT NULL,
+	bill float(50) NOT NULL,
+	status bit NOT NULL,
+    timetrans datetime NOT NULL,
+	transfee float NULL
+);
+ALTER TABLE waterbill AUTO_INCREMENT=000001;
+ALTER TABLE waterbill
+ADD CONSTRAINT fk_accountid_waterbill
+FOREIGN KEY (accountid) REFERENCES accountt(accountid);
+
+-- Inserting 15 example records
+INSERT INTO waterbill (waterid, periodpay, accountid, ownername, owneraddress, bill, status, timetrans, transfee)
+VALUES
+(1, '2024-01-01', 100000, 'Alice Smith', '123 Main St, CityA', 45.50, 1, NOW(), 2.50),
+(2, '2024-01-02', 100001, 'Bob Johnson', '456 Elm St, CityB', 60.75, 0, NOW(), 3.00),
+(3, '2024-01-03', 100002, 'Charlie Brown', '789 Pine St, CityC', 35.25, 1, NOW(), 1.50),
+(4, '2024-01-04', 100003, 'Eve Johnson', '101 Maple St, CityD', 80.00, 0, NOW(), 2.75),
+(5, '2024-01-05', 100004, 'David Lee', '202 Oak St, CityE', 55.50, 1, NOW(), 2.00),
+(6, '2024-01-06', 100005, 'Grace Taylor', '303 Cedar St, CityF', 40.75, 0, NOW(), 1.75),
+(7, '2024-01-07', 100006, 'Frank White', '404 Birch St, CityG', 70.00, 1, NOW(), 3.50),
+(8, '2024-01-08', 100007, 'Hannah Brown', '505 Walnut St, CityH', 50.25, 0, NOW(), 2.25),
+(9, '2024-01-09', 100008, 'Ian Johnson', '606 Ash St, CityI', 65.50, 1, NOW(), 2.75),
+(10, '2024-01-10', 100009, 'Julia Davis', '707 Spruce St, CityJ', 55.75, 0, NOW(), 2.50),
+(11, '2024-01-11', 100010, 'Kevin Smith', '808 Redwood St, CityK', 45.00, 1, NOW(), 1.75),
+(12, '2024-01-12', 100011, 'Lily Johnson', '909 Cypress St, CityL', 65.25, 0, NOW(), 2.50),
+(13, '2024-01-13', 100012, 'Mark Brown', '1010 Fir St, CityM', 50.50, 1, NOW(), 2.00),
+(14, '2024-01-14', 100013, 'Natalie Green', '1111 Willow St, CityN', 75.75, 0, NOW(), 3.00),
+(15, '2024-01-15', 100014, 'Oliver Taylor', '1212 Poplar St, CityO', 35.00, 1, NOW(), 1.25);
+CREATE TABLE loan(
+    loanid INT PRIMARY KEY AUTO_INCREMENT,
+    accountid INT NOT NULL,
+    amount FLOAT(50) NOT NULL,
+    interestrate FLOAT(5,2) NOT NULL,
+    startdate DATE NOT NULL,
+    enddate DATE NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    timetrans DATETIME NOT NULL,
+    FOREIGN KEY (accountid) REFERENCES accountt(accountid)
+);
+/*SELECT 
+    a.accountid, 
+    b.moneytrans, 
+    b.timetrans,
+    (a.balance - b.moneytrans) AS newbalance
+FROM 
+    accountt a savingelectricitybill
+JOIN 
+    transfer b 
+ON 
+    a.accountid = b.account1id
+WHERE 
+    a.accountid = 100004;*/
+
+-- Creating saving table without savingtype
+CREATE TABLE saving(
+    savingid INT PRIMARY KEY AUTO_INCREMENT,
+    accountid INT NOT NULL,
+    amount FLOAT(50) NOT NULL,
+    monthsave varchar(50),
+    startdate DATETIME NOT NULL,
+    enddate DATE NOT NULL,
+    FOREIGN KEY (accountid) REFERENCES accountt(accountid)
+);
