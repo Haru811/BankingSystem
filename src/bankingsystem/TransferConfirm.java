@@ -1,11 +1,14 @@
 
 package bankingsystem;
+import bankingsystem.SignUp;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import javax.swing.JOptionPane;
+
 
 
 public class TransferConfirm extends javax.swing.JFrame {
@@ -15,9 +18,8 @@ public class TransferConfirm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);//form in center
         //load();
     }
-    
         int myAccNum;
-        PreparedStatement pst;
+        PreparedStatement pst,pst1,pst2,pst3,pst4;
         ResultSet rs;
         
     public TransferConfirm(int Num){
@@ -175,7 +177,57 @@ public class TransferConfirm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void TransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferActionPerformed
-        JOptionPane.showMessageDialog(null,"Transfer Completed!");
+        Date date =new Date();
+        java.sql.Date sqldate= new java.sql.Date(date.getTime());
+        String s;
+        s=String.valueOf(myAccNum);
+        String acc = jTextField1.getText();
+        int amount = Integer.parseInt(jTextField2.getText());
+        String content = jTextField3.getText();
+        
+        if(acc.equals("")){
+            JOptionPane.showMessageDialog(null,"Add Account ID");
+        }
+        else if(content.equals("")){
+            JOptionPane.showMessageDialog(null,"Add Content");
+        }
+        else if(String.valueOf(amount).equals("")){
+            JOptionPane.showMessageDialog(null,"Add Amount");
+        }
+        else if(amount > Bala){
+            JOptionPane.showMessageDialog(null,"Insufficient Balance");
+        }
+        else{
+            try{
+                //Sender
+                String query1 = "Update accountt set balance= balance-? where accountid='"+s+"'";
+                pst1= TransferConfirm.upDataDB().prepareStatement(query1);
+                pst1.setInt(1, amount);
+                pst1.executeUpdate();
+                
+                //Receiver
+                String query2 = "Update accountt set balance= balance+? where accountid=?";
+                pst2= TransferConfirm.upDataDB().prepareStatement(query2);
+                pst2.setInt(1, amount);
+                pst2.setString(2, acc);
+                pst2.executeUpdate();
+                
+                //Transaction
+                String query3 = "Insert into transfer(account1id,account2id,moneytrans,content,timetrans) Values ('"+s+"',?,?,?,?)";
+                pst3= TransferConfirm.upDataDB().prepareStatement(query3);
+                pst3.setString(1, acc);
+                pst3.setInt(2, amount); 
+                pst3.setString(3, content);
+                pst3.setDate(4, sqldate);
+                pst3.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null,"Transfer Completed");                    
+          
+            }catch(SQLException ex){
+                java.util.logging.Logger.getLogger(TransferConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        }
+   
     }//GEN-LAST:event_TransferActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -192,7 +244,7 @@ public class TransferConfirm extends javax.swing.JFrame {
                 this.dispose();
             }
          }catch(SQLException ex){
-             java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+             java.util.logging.Logger.getLogger(TransferConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
          }
     }//GEN-LAST:event_jButton4ActionPerformed
 

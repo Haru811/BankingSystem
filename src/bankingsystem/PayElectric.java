@@ -7,15 +7,26 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
- class PayElectric extends javax.swing.JFrame {
+
+ public class PayElectric extends javax.swing.JFrame {
 
     public PayElectric() {
         initComponents();
         this.setLocationRelativeTo(null);//form in center
-        
+    }
+    
+    int myAccNum;
+    float bill;
+    PreparedStatement pst,pst1;
+    ResultSet rs;
+    
+    public PayElectric(int Num) {
+        initComponents();
+        this.setLocationRelativeTo(null);//form in center
+        myAccNum= Num;
+        jLabel11.setText(" " +myAccNum);        
     }
     
     public static Connection upDataDB(){
@@ -58,11 +69,13 @@ import javax.swing.table.DefaultTableModel;
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PayElectric");
 
-        jLabel2.setText("Customer id");
+        jLabel2.setText("Bill ID");
 
         jButton1.setText("Inquiry bill");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +116,7 @@ import javax.swing.table.DefaultTableModel;
 
         jLabel8.setText("Bill");
 
-        jLabel9.setText("Time Trans");
+        jLabel9.setText("Status ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,61 +197,101 @@ import javax.swing.table.DefaultTableModel;
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel10.setText("Account ID");
+
+        jLabel11.setText("jLabel11");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addComponent(jButton4)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(360, 360, 360))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(62, Short.MAX_VALUE))))
+                        .addContainerGap(62, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(65, 65, 65)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(87, 87, 87))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(218, 218, 218))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(214, 214, 214))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(44, 44, 44)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JOptionPane.showMessageDialog(null,"Paid Complete!");
+        String s;
+        s=String.valueOf(myAccNum);
+        bill= Float.parseFloat(jTextField8.getText());
+        try{
+            String query1= "Update accountt set balance = balance - '"+bill+"' where accountid='"+s+"'";         
+            pst1 =PayElectric.upDataDB().prepareStatement(query1);
+            pst1.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Paid Complete!");
+        }catch(SQLException ex){
+        java.util.logging.Logger.getLogger(PayElectric.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    }
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        dispose();
-        Menu me=new Menu();
-        me.setVisible(true);
+       try {
+           String s;
+           s=String.valueOf(myAccNum);
+            String query="Select * from accountt where accountid='"+s+"'";
+            pst = PayElectric.upDataDB().prepareStatement(query);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                Menu me=new Menu(rs.getInt(1));
+                me.GetBalance(rs.getInt(7));
+                me.setVisible(true);       
+                this.dispose();
+            }
+         }catch(SQLException ex){
+             java.util.logging.Logger.getLogger(PayElectric.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+         }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -249,7 +302,7 @@ import javax.swing.table.DefaultTableModel;
        PreparedStatement pst;
        ResultSet rs;
        String elecid= String.valueOf(jTextField1.getText());
-       
+
        String query="SELECT * FROM electricitybill WHERE elecid='"+elecid+"' ";
        try{
            pst = PayElectric.upDataDB().prepareStatement(query);       
@@ -263,7 +316,8 @@ import javax.swing.table.DefaultTableModel;
             jTextField6.setText(rs.getString(5));//ownername
             jTextField7.setText(rs.getString(6));//owneraddress
             jTextField8.setText(rs.getString(7));//bill
-            jTextField9.setText(rs.getString(10));//timetrans         
+            jTextField9.setText(rs.getString(8));//status 
+            
         }      
        }catch(Exception e){
            
@@ -283,6 +337,8 @@ import javax.swing.table.DefaultTableModel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

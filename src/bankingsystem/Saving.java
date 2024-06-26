@@ -1,13 +1,50 @@
 
 package bankingsystem;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
+
 public class Saving extends javax.swing.JFrame {
 
     public Saving() {
         initComponents();
         this.setLocationRelativeTo(null);//form in center
     }
-
+    
+    int myAccNum;
+    PreparedStatement pst,pst1,pst2;
+    ResultSet rs;
+    
+    public Saving(int Num) {
+        initComponents();
+        this.setLocationRelativeTo(null);//form in center
+        myAccNum= Num;
+        jLabel4.setText(" " +myAccNum);  
+            
+    }
+    
+    public static Connection upDataDB(){
+       Connection con= null;
+       String vi="12345678";
+       String tam="123456";     
+       try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
+           System.out.println("Connected to database successfully");
+           //con.close();
+           return con;
+       }catch(ClassNotFoundException | SQLException e){
+           throw new RuntimeException("Cannot connect to database");
+       }
+   }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -19,6 +56,10 @@ public class Saving extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -31,13 +72,18 @@ public class Saving extends javax.swing.JFrame {
         });
 
         jButton1.setText("Confirm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 month", "3 months", "6 months", "12 months" }));
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("Percentage profit for 1 month\nPercentage profit for 3 months\nPercentage profit for 6 months\nPercentage profit for 12 months");
+        jTextArea1.setText("Percentage profit for 1 month is \nPercentage profit for 3 months\nPercentage profit for 6 months\nPercentage profit for 12 months");
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -48,6 +94,15 @@ public class Saving extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("The amount must  be greater than 200");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel3.setText("Account ID");
+
+        jLabel4.setText("jLabel4");
+
+        jLabel5.setText("Month");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -57,33 +112,51 @@ public class Saving extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(jButton1))
                             .addComponent(jButton2)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(113, 113, 113)
+                                .addGap(57, 57, 57)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jTextField1)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(59, 59, 59)
+                                        .addComponent(jLabel4))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(161, 161, 161)
+                                .addComponent(jButton1)))
+                        .addGap(0, 114, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -96,10 +169,72 @@ public class Saving extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
-        Menu me=new Menu();
-        me.setVisible(true);
+        try {
+           String s;
+           s=String.valueOf(myAccNum);
+            String query="Select * from accountt where accountid='"+s+"'";
+            pst = Saving.upDataDB().prepareStatement(query);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                Menu me=new Menu(rs.getInt(1));
+                me.GetBalance(rs.getInt(7));
+                me.setVisible(true);       
+                this.dispose();
+            }
+         }catch(SQLException ex){
+             java.util.logging.Logger.getLogger(Saving.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       String s;
+       s=String.valueOf(myAccNum);
+       String mo=jComboBox1.getSelectedItem().toString();
+
+       Date date =new Date();
+       java.sql.Date sqldate= new java.sql.Date(date.getTime());
+       
+       LocalDate futureDate;
+ 
+       int amount = Integer.parseInt(jTextField1.getText());
+        try{
+            //update accountt
+                String query1 = "Update accountt set balance=balance-? , saving=? where accountid='"+s+"'";
+                pst1= Saving.upDataDB().prepareStatement(query1);
+                pst1.setInt(1, amount);
+                pst1.setInt(2,amount);
+                pst1.executeUpdate(); 
+                
+                
+            //update savingg
+                String query2 ="Insert into saving(accountid,amount,monthsave,startdate,enddate) values ('"+s+"',?,?,?,?) ";
+                pst2=Saving.upDataDB().prepareStatement(query2);
+                pst2.setInt(1, amount);
+                pst2.setString(2, mo);
+                pst2.setDate(3, sqldate);
+        
+                if("1 month".equals(jComboBox1.getSelectedItem().toString())){
+                    futureDate= LocalDate.now().plusMonths(1);
+                    pst2.setDate(4, java.sql.Date.valueOf(futureDate));
+                }
+                else if("3 months".equals(jComboBox1.getSelectedItem().toString())){
+                    futureDate= LocalDate.now().plusMonths(3);
+                    pst2.setDate(4, java.sql.Date.valueOf(futureDate));
+                }
+                else if("6 months".equals(jComboBox1.getSelectedItem().toString())){
+                    futureDate= LocalDate.now().plusMonths(6);
+                    pst2.setDate(4, java.sql.Date.valueOf(futureDate));
+                }
+                else{
+                    futureDate= LocalDate.now().plusMonths(12);
+                    pst2.setDate(4, java.sql.Date.valueOf(futureDate));
+                }
+                pst2.executeUpdate();
+                
+        }catch(SQLException ex){
+                java.util.logging.Logger.getLogger(Saving.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     public static void main(String args[]) {
@@ -115,6 +250,10 @@ public class Saving extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;

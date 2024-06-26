@@ -136,7 +136,7 @@ public class Transaction extends javax.swing.JFrame {
                 this.dispose();
             }
          }catch(SQLException ex){
-             java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+             java.util.logging.Logger.getLogger(Transaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
          }
         
     }//GEN-LAST:event_jButton1ActionPerformed

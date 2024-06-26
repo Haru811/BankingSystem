@@ -226,9 +226,18 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoanActionPerformed
-        dispose();
-        Loan loan=new Loan();
-        loan.setVisible(true);
+        try {
+            String query="SELECT * FROM accountt where accountid='"+myAccNum+"'";
+            pst = Menu.upDataDB().prepareStatement(query);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                Loan lo=new Loan(rs.getInt(1));
+                lo.setVisible(true);       
+                this.dispose();
+            }
+         }catch(SQLException ex){
+             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+         }
     }//GEN-LAST:event_LoanActionPerformed
 
     private void TransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferActionPerformed
@@ -243,20 +252,39 @@ public class Menu extends javax.swing.JFrame {
                 this.dispose();
             }
          }catch(SQLException ex){
-             java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
          }
     }//GEN-LAST:event_TransferActionPerformed
 
     private void PayElecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayElecActionPerformed
-       dispose();
-       PayElectric elec=new PayElectric();
-       elec.setVisible(true);
+        try {
+            String query="SELECT * FROM accountt where accountid='"+myAccNum+"'";
+            pst = Menu.upDataDB().prepareStatement(query);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                PayElectric elec=new PayElectric(rs.getInt(1));
+                elec.setVisible(true);       
+                this.dispose();
+            }
+         }catch(SQLException ex){
+             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+         }
+
     }//GEN-LAST:event_PayElecActionPerformed
 
     private void PayWaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayWaterActionPerformed
-       dispose();
-       PayWater wat=new PayWater();
-       wat.setVisible(true);
+       try {
+            String query="SELECT * FROM accountt where accountid='"+myAccNum+"'";
+            pst = Menu.upDataDB().prepareStatement(query);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                PayWater water=new PayWater(rs.getInt(1));
+                water.setVisible(true);       
+                this.dispose();
+            }
+         }catch(SQLException ex){
+             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+         }
     }//GEN-LAST:event_PayWaterActionPerformed
 
     private void TransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransactionActionPerformed
@@ -270,14 +298,23 @@ public class Menu extends javax.swing.JFrame {
                 this.dispose();
             }
          }catch(SQLException ex){
-             java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
          }
     }//GEN-LAST:event_TransactionActionPerformed
 
     private void SavingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavingActionPerformed
-       dispose();
-       Saving sa=new Saving();
-       sa.setVisible(true);
+       try {
+            String query="SELECT * FROM accountt where accountid='"+myAccNum+"'";
+            pst = Menu.upDataDB().prepareStatement(query);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                Saving sa=new Saving(rs.getInt(1));
+                sa.setVisible(true);       
+                this.dispose();
+            }
+         }catch(SQLException ex){
+             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+         }
     }//GEN-LAST:event_SavingActionPerformed
 
     private void LockCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LockCardActionPerformed
@@ -292,14 +329,24 @@ public class Menu extends javax.swing.JFrame {
                 this.dispose();
             }
          }catch(SQLException ex){
-             java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
          }
     }//GEN-LAST:event_LockCardActionPerformed
 
     private void ChaPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChaPassActionPerformed
-       dispose();
-       ChaPass cha=new ChaPass();
-       cha.setVisible(true);
+       try {
+            String query="SELECT * FROM accountt where accountid='"+myAccNum+"'";
+            pst = Menu.upDataDB().prepareStatement(query);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                ChaPass cha=new ChaPass(rs.getInt(1));
+                //tras.GetBalance(rs.getInt(7));
+                cha.setVisible(true);       
+                this.dispose();
+            }
+         }catch(SQLException ex){
+             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);     
+         }
     }//GEN-LAST:event_ChaPassActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
