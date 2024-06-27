@@ -33,7 +33,7 @@ public class ChaPass extends javax.swing.JFrame {
        String tam="123456";     
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",tam);
            System.out.println("Connected to database successfully");
            //con.close();
            return con;
@@ -170,21 +170,29 @@ public class ChaPass extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String s;
+        s=String.valueOf(myAccNum);
         String oldpass = String.valueOf(jPasswordField1.getPassword());
         String newpass= String.valueOf(jPasswordField2.getPassword());
         String conpass= String.valueOf(jPasswordField3.getPassword());
-        PreparedStatement pst;
+        PreparedStatement pst,pst1;
         ResultSet rs;   
-        String query1="Select pass From customer";
-        String query2="Update customer Set pass='"+newpass+"'";
+        String query1="Select password From accountt";
+        String query2="Update accountt Set password=? where accountid='"+s+"'";
         
          try {
-            pst = ChaPass.upDataDB().prepareStatement(query1);
-            rs= pst.executeQuery();
-            if(rs.next()){    
+            if(!newpass.equals(conpass)){
+                JOptionPane.showMessageDialog(null,"Confirmm Password Not Correct");
             }
             else{
-                JOptionPane.showMessageDialog(null,"Login Failed");
+                pst = ChaPass.upDataDB().prepareStatement(query1);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                pst1 = ChaPass.upDataDB().prepareStatement(query2);
+                pst1.setString(1, newpass);
+                pst1.executeUpdate();
+            }
+                JOptionPane.showMessageDialog(null, "Change Password Success");
             }
          }catch(SQLException ex){
              java.util.logging.Logger.getLogger(ChaPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
