@@ -33,7 +33,7 @@ public class Lock extends javax.swing.JFrame {
        String tam="123456";     
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",tam);
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
            System.out.println("Connected to database successfully");
            return con;
        }catch(ClassNotFoundException | SQLException e){
@@ -54,7 +54,7 @@ public class Lock extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Lock");
+        setTitle("Lock Account");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Confirm to lock card");

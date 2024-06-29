@@ -38,7 +38,7 @@ public class PayWater extends javax.swing.JFrame {
        String tam="123456";     
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",tam);
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
            System.out.println("Connected to database successfully");
            return con;
        }catch(ClassNotFoundException | SQLException e){

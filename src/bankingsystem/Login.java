@@ -22,7 +22,7 @@ public class Login extends javax.swing.JFrame {
        String tam="123456";     
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",tam);
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
            System.out.println("Connected to database successfully");
            return con;
        }catch(ClassNotFoundException | SQLException e){
@@ -161,6 +161,7 @@ public class Login extends javax.swing.JFrame {
             pst.setString(1, cusid);
             pst.setString(2, pass);
             rs= pst.executeQuery(); 
+            
             if(rs.next() && rs.getInt(11)!=1){
                 Menu me=new Menu(rs.getInt(1));
                 me.GetBalance(rs.getInt(7));
@@ -168,7 +169,7 @@ public class Login extends javax.swing.JFrame {
                 this.dispose();
             }
             else{
-                JOptionPane.showMessageDialog(null,"Login Failed");
+                JOptionPane.showMessageDialog(null,"Your account is locked");
             }
          }catch(SQLException ex){
              java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

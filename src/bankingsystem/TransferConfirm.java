@@ -42,7 +42,7 @@ public class TransferConfirm extends javax.swing.JFrame {
        String tam="123456";     
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",tam);
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
            System.out.println("Connected to database successfully");
            //con.close();
            return con;
@@ -69,6 +69,7 @@ public class TransferConfirm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Transfer");
 
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +192,7 @@ public class TransferConfirm extends javax.swing.JFrame {
         else if(content.equals("")){
             JOptionPane.showMessageDialog(null,"Add Content");
         }
-        else if(String.valueOf(amount).equals("")){
+        else if(String.valueOf(amount).equals(" ")){
             JOptionPane.showMessageDialog(null,"Add Amount");
         }
         else if(amount > Bala){

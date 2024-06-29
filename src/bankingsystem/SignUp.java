@@ -25,7 +25,7 @@ public class SignUp extends javax.swing.JFrame {
        String tam="123456";     
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",tam);
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
            System.out.println("Connected to database successfully");
            //con.close();
            return con;
@@ -216,7 +216,11 @@ public class SignUp extends javax.swing.JFrame {
             String repass= String.valueOf(jPasswordField2.getPassword());
             var customerID = jTextField4.getText();
             
-            if(name.equals("")){
+            
+            if(customerID.equals("")){
+                JOptionPane.showMessageDialog(null,"Add Citizen Identification");
+            }
+            else if(name.equals("")){
                 JOptionPane.showMessageDialog(null,"Add User Name");
             }
             else if(email.equals("")){
@@ -230,10 +234,7 @@ public class SignUp extends javax.swing.JFrame {
             }
             else if(!pass.equals(repass)){
                 JOptionPane.showMessageDialog(null,"Password Not Correct");
-            }
-            else if(customerID.equals("")){
-                JOptionPane.showMessageDialog(null,"Add Citizen Identification");
-            }
+            }     
             else if(!jCheckBox1.isSelected()){
                 JOptionPane.showMessageDialog(null,"Please Agree to the Terms and Conditons ");
             }

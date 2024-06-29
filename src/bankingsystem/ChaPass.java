@@ -33,7 +33,7 @@ public class ChaPass extends javax.swing.JFrame {
        String tam="123456";     
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",tam);
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root",vi);
            System.out.println("Connected to database successfully");
            //con.close();
            return con;
@@ -65,12 +65,6 @@ public class ChaPass extends javax.swing.JFrame {
         jLabel2.setText("New Password");
 
         jLabel3.setText("Confirm password");
-
-        jPasswordField1.setText("jPasswordField1");
-
-        jPasswordField2.setText("jPasswordField2");
-
-        jPasswordField3.setText("jPasswordField3");
 
         jButton1.setText("Confirm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
